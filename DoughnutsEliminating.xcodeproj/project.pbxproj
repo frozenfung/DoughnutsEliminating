@@ -13,6 +13,9 @@
 		B09ADB662B2F42580048FB86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B09ADB642B2F42580048FB86 /* Main.storyboard */; };
 		B09ADB682B2F42590048FB86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B09ADB672B2F42590048FB86 /* Assets.xcassets */; };
 		B09ADB6B2B2F42590048FB86 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B09ADB692B2F42590048FB86 /* LaunchScreen.storyboard */; };
+		B09ADB772B2F43850048FB86 /* FoodTruckKit in Frameworks */ = {isa = PBXBuildFile; productRef = B09ADB762B2F43850048FB86 /* FoodTruckKit */; };
+		B0C56D6B2B2F622E00138877 /* DoughnutClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C56D6A2B2F622E00138877 /* DoughnutClass.swift */; };
+		B0C56D6D2B2F6AEC00138877 /* GameClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C56D6C2B2F6AEC00138877 /* GameClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		B09ADB672B2F42590048FB86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B09ADB6A2B2F42590048FB86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B09ADB6C2B2F42590048FB86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B09ADB742B2F43770048FB86 /* FoodTruckKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = FoodTruckKit; path = ../../../Downloads/FoodTruckBuildingASwiftUIMultiplatformApp/FoodTruckKit; sourceTree = "<group>"; };
+		B0C56D6A2B2F622E00138877 /* DoughnutClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoughnutClass.swift; sourceTree = "<group>"; };
+		B0C56D6C2B2F6AEC00138877 /* GameClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B09ADB772B2F43850048FB86 /* FoodTruckKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,8 +47,10 @@
 		B09ADB522B2F42580048FB86 = {
 			isa = PBXGroup;
 			children = (
+				B09ADB742B2F43770048FB86 /* FoodTruckKit */,
 				B09ADB5D2B2F42580048FB86 /* DoughnutsEliminating */,
 				B09ADB5C2B2F42580048FB86 /* Products */,
+				B09ADB752B2F43850048FB86 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,10 +70,19 @@
 				B09ADB622B2F42580048FB86 /* ViewController.swift */,
 				B09ADB642B2F42580048FB86 /* Main.storyboard */,
 				B09ADB672B2F42590048FB86 /* Assets.xcassets */,
+				B0C56D6A2B2F622E00138877 /* DoughnutClass.swift */,
+				B0C56D6C2B2F6AEC00138877 /* GameClass.swift */,
 				B09ADB692B2F42590048FB86 /* LaunchScreen.storyboard */,
 				B09ADB6C2B2F42590048FB86 /* Info.plist */,
 			);
 			path = DoughnutsEliminating;
+			sourceTree = "<group>";
+		};
+		B09ADB752B2F43850048FB86 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +101,9 @@
 			dependencies = (
 			);
 			name = DoughnutsEliminating;
+			packageProductDependencies = (
+				B09ADB762B2F43850048FB86 /* FoodTruckKit */,
+			);
 			productName = DoughnutsEliminating;
 			productReference = B09ADB5B2B2F42580048FB86 /* DoughnutsEliminating.app */;
 			productType = "com.apple.product-type.application";
@@ -140,6 +161,8 @@
 			files = (
 				B09ADB632B2F42580048FB86 /* ViewController.swift in Sources */,
 				B09ADB5F2B2F42580048FB86 /* AppDelegate.swift in Sources */,
+				B0C56D6D2B2F6AEC00138877 /* GameClass.swift in Sources */,
+				B0C56D6B2B2F622E00138877 /* DoughnutClass.swift in Sources */,
 				B09ADB612B2F42580048FB86 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,6 +315,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GEXKH4HCBL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoughnutsEliminating/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -319,6 +343,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GEXKH4HCBL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoughnutsEliminating/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -361,6 +386,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B09ADB762B2F43850048FB86 /* FoodTruckKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FoodTruckKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B09ADB532B2F42580048FB86 /* Project object */;
 }

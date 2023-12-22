@@ -257,14 +257,6 @@ then eat them all 😋😋</string>
                                 <rect key="frame" x="112" y="279" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAQ-Yv-Off">
-                                <rect key="frame" x="119" y="698" width="154" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <buttonConfiguration key="configuration" style="plain" title="I wanna eat more"/>
-                                <connections>
-                                    <action selector="restartGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZTr-HJ-pNt"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -274,7 +266,6 @@ then eat them all 😋😋</string>
                         <outlet property="doughImageView2" destination="1Ob-Ea-ubF" id="Sd4-9s-i1V"/>
                         <outlet property="glazeImageView" destination="k0f-XR-fX7" id="juK-iP-G0k"/>
                         <outlet property="glazeImageView2" destination="E8M-qc-6tg" id="C4c-8f-dDm"/>
-                        <outlet property="playAgain" destination="AAQ-Yv-Off" id="GFd-mC-1n8"/>
                         <outlet property="status" destination="Mlj-iA-pWY" id="zMc-Bj-e0O"/>
                         <outlet property="toppingImageView" destination="JIA-Ye-wVo" id="QuU-Jg-26a"/>
                         <outlet property="toppingImageView2" destination="Fpx-VA-Nmq" id="tBf-JR-T9D"/>
@@ -294,11 +285,57 @@ then eat them all 😋😋</string>
                         <outletCollection property="flippers" destination="uIc-Pe-ySW" collectionClass="NSMutableArray" id="qqd-gf-Zh0"/>
                         <outletCollection property="flippers" destination="ffc-hV-ImE" collectionClass="NSMutableArray" id="Pgh-JJ-5Tt"/>
                         <outletCollection property="flippers" destination="IHm-rB-mgN" collectionClass="NSMutableArray" id="hCr-nV-I2d"/>
+                        <segue destination="teX-IX-GtQ" kind="show" identifier="showGrade" destinationCreationSelector="showGradeView:sender:" id="DGD-uL-jUP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="130.53435114503816" y="-55.633802816901408"/>
+        </scene>
+        <!--Show Grade View Controller-->
+        <scene sceneID="gB8-ZJ-jk4">
+            <objects>
+                <viewController id="teX-IX-GtQ" customClass="ShowGradeViewController" customModule="DoughnutsEliminating" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8sv-iq-A5K">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Match times" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSy-SY-3CE">
+                                <rect key="frame" x="115" y="182" width="159" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qe5-iT-1Qo">
+                                <rect key="frame" x="149" y="438" width="96" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Try Again"/>
+                                <connections>
+                                    <action selector="dismissShowGrade:" destination="teX-IX-GtQ" eventType="touchUpInside" id="rtY-jH-YdQ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7D-Tr-bgz">
+                                <rect key="frame" x="172" y="226" width="49" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Mug-me-efw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="iVD-SR-wgz"/>
+                    <connections>
+                        <outlet property="gradeLabel" destination="O7D-Tr-bgz" id="jPN-et-GW1"/>
+                        <outlet property="tryAgain" destination="qe5-iT-1Qo" id="lsn-v5-hdX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nVo-VN-Rqk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="893.89312977099235" y="-56.338028169014088"/>
         </scene>
     </scenes>
     <resources>

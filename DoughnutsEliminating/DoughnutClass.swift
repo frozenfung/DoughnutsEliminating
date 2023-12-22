@@ -22,7 +22,6 @@ class Doughnut {
         ToppingImg = newMeta.topping!
         Button = newButton
         ButtonPosition = newButtonPosition
-        Button.alpha = 0.95
     }
     
     func updateButtonAlpha(newAlpha: Float) {
@@ -44,5 +43,6 @@ class Doughnut {
     func initButton() {
         Button.isHidden = false
         Button.isUserInteractionEnabled = true
+        Button.alpha = 0.95
     }
 }

@@ -9,17 +9,12 @@ import UIKit
 import Foundation
 import FoodTruckKit
 
-var eliminatedDoughnut: Int = 0
-let doughnutCount = 16
 var doughnuts:[Doughnut] = []
-
 let maxSelectedDough = 2
 var selectedDoughs:[Doughnut] = []
 
 var doughImg1:MultiLayerDoughnut?
 var doughImg2:MultiLayerDoughnut?
-
-var restartButton: UIButton?
 
 struct DoughnutMeta {
     var uuid: String
@@ -28,9 +23,38 @@ struct DoughnutMeta {
     var topping: UIImage?
 }
 
+enum Phase:String {
+    case Ongoing, Ended
+}
+
 class Game {
-    init(flippers: [UIButton], restart: UIButton, multiLayerDough1: MultiLayerDoughnut, multiLayerDough2: MultiLayerDoughnut) {
-        restartButton = restart
+    var matchCount: Int = 0
+    var flippers:[UIButton] = []
+    var eliminatedDoughnut: Int = 0 {
+        willSet {
+            if newValue == doughnutCount {
+                self.phase = .Ended
+            }
+        }
+    }
+    var phase:Phase = .Ongoing {
+        willSet {
+            if newValue == .Ended {
+                self.restartGame(flippers: self.flippers)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.phase = .Ongoing
+                    self.matchCount = 0
+                    self.eliminatedDoughnut = 0
+                    self.flushSelectedDoughs()
+                }
+            }
+        }
+    }
+
+    let doughnutCount = 16
+
+    init(flippers: [UIButton], multiLayerDough1: MultiLayerDoughnut, multiLayerDough2: MultiLayerDoughnut) {
+        self.flippers = flippers
         doughImg1 = multiLayerDough1
         doughImg2 = multiLayerDough2
         // setup doughnuts' UUID and image
@@ -58,8 +82,6 @@ class Game {
                 newButtonPosition: i-1
             ))
         }
-        
-        restartButton!.isHidden = true
     }
     
     func findDoughnutByButtonPosition(index: Int) -> Doughnut {
@@ -75,19 +97,15 @@ class Game {
         for i in 1...doughnutCount {
             if (index == doughnuts[i-1].ButtonPosition) {
                 selectedDoughs.append(doughnuts[i-1])
-                self.updateDoughImgFrameOrigin(dIndex: (i-1))
+                self.updateDoughImg(dIndex: (i-1))
             }
         }
-        self.updateSelectedDoughsAlpha(newAlpha: 0.05)
+        self.updateSelectedDoughsAlpha(newAlpha: 0)
 
         if selectedDoughs.count < maxSelectedDough {
             return MatchStatus.GetAnother
         } else {
-            // Lock screen
-            for d in doughnuts {
-                d.toggleClickable(clickable: false)
-            }
-            
+            self.lockFlippers()
             // Match
             let result:MatchStatus = self.compareId()
 
@@ -101,7 +119,14 @@ class Game {
         }
     }
     
+    func lockFlippers() {
+        for d in doughnuts {
+            d.toggleClickable(clickable: false)
+        }
+    }
+    
     func compareId() -> MatchStatus {
+        self.matchCount += 1
         if selectedDoughs.first!.Id == selectedDoughs.last!.Id {
             return MatchStatus.Congratulation
         }
@@ -135,6 +160,7 @@ class Game {
     }
     
     func matchSuccess() {
+        self.eliminatedDoughnut += 2
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             for sd in selectedDoughs {
                 sd.markAsEliminated()
@@ -145,21 +171,12 @@ class Game {
                 doughImg2?.glaze.image = nil
                 doughImg2?.topping.image = nil
             }
-            eliminatedDoughnut += 2
             self.flushSelectedDoughs()
             // unlock screen
             for d in doughnuts {
                 d.toggleClickable(clickable: true)
             }
-            
-            if eliminatedDoughnut == doughnutCount {
-                self.showRestartButton()
-            }
         }
-    }
-    
-    func showRestartButton() {
-        restartButton!.isHidden = false
     }
     
     func restartGame(flippers: [UIButton]) {
@@ -192,11 +209,9 @@ class Game {
             d.initButton()
             doughnuts.append(d)
         }
-        
-        restartButton!.isHidden = true
     }
     
-    func updateDoughImgFrameOrigin(dIndex: Int) {
+    func updateDoughImg(dIndex: Int) {
         let x:CGFloat = doughnuts[dIndex].Button.frame.origin.x
         let y:CGFloat = doughnuts[dIndex].Button.frame.origin.y
         

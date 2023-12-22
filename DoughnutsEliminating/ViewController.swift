@@ -43,7 +43,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var status: UILabel!
     @IBOutlet var flippers: [UIButton]!
-    @IBOutlet weak var playAgain: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +64,6 @@ class ViewController: UIViewController {
         
         game = Game(
             flippers: flippers,
-            restart: playAgain,
             multiLayerDough1: md1!,
             multiLayerDough2: md2!
         )
@@ -75,11 +73,15 @@ class ViewController: UIViewController {
         let focusButIndex = flippers.firstIndex(of: sender)
         let matchStatus:MatchStatus = game.appendSelectedDough(index: focusButIndex!)
         status.text = matchStatus.rawValue
-
+        if game.phase == .Ended {
+            performSegue(withIdentifier: "showGrade", sender: nil)
+        }
     }
-    
-    @IBAction func restartGame(_ sender: Any) {
-        game.restartGame(flippers: flippers)
+
+    @IBSegueAction func showGradeView(_ coder: NSCoder, sender: Any?) -> ShowGradeViewController? {
+        let controller = ShowGradeViewController(coder: coder)
+        controller?.grade = game.matchCount
+        return controller
     }
 }
 

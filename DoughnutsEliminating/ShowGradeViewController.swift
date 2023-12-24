@@ -7,6 +7,8 @@
 
 import UIKit
 
+extension UIViewController: UITextFieldDelegate {}
+
 class ShowGradeViewController: UIViewController {
     var grade:Int! = 0
     var inputName:String = ""
@@ -27,7 +29,8 @@ class ShowGradeViewController: UIViewController {
         alertController = UIAlertController(title: "Register Grade", message: "type your name", preferredStyle: .alert)
 
         alertController.addTextField {(textField) in
-            textField.placeholder = "frozenfung"
+            textField.delegate = self
+            textField.placeholder = "Elon Mask"
         }
 
         // add the buttons/actions to the view controller
@@ -49,12 +52,23 @@ class ShowGradeViewController: UIViewController {
     @IBAction func regRecord(_ sender: Any) {
         self.present(self.alertController, animated: true, completion: nil)
     }
-    
 
     @IBSegueAction func showLeaderBoard(_ coder: NSCoder) -> LeaderBoardTableViewController? {
         let controller = LeaderBoardTableViewController(coder: coder)
         controller?.inputName = inputName
         controller?.grade = grade
         return controller
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+       var result = true
+       if let originalText = textField.text,
+          let range = Range(range, in: originalText) {
+              let newText = originalText.replacingCharacters(in: range, with: string)
+              if newText.contains("香菜") {
+                 result = false
+              }
+       }
+       return result
     }
 }

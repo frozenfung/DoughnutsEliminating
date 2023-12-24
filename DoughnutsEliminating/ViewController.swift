@@ -8,7 +8,6 @@
 import UIKit
 import FoodTruckKit
 
-
 enum MatchStatus:String {
     case Congratulation, NotThisOne, GetAnother
 }
@@ -23,7 +22,6 @@ class MultiLayerDoughnut {
         topping = newTopping
     }
 }
-
 
 var md1:MultiLayerDoughnut?
 var md2:MultiLayerDoughnut?
@@ -73,7 +71,8 @@ class ViewController: UIViewController {
         let focusButIndex = flippers.firstIndex(of: sender)
         let matchStatus:MatchStatus = game.appendSelectedDough(index: focusButIndex!)
         status.text = matchStatus.rawValue
-        if game.phase == .Ended {
+//        if game.phase == .Ended {
+        if true {
             performSegue(withIdentifier: "showGrade", sender: nil)
         }
     }

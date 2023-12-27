@@ -7,11 +7,25 @@
 
 import UIKit
 
+// Encode
+struct RankBody:Encodable {
+    let records: [Record]
+    
+    struct Record: Encodable {
+        let fields: Fields
+    }
+    
+    struct Fields: Encodable {
+        let name:String
+        let matchCount:String
+    }
+}
+
 extension UIViewController: UITextFieldDelegate {}
 
 class ShowGradeViewController: UIViewController {
     var grade:Int! = 0
-    var inputName:String = ""
+    var inputName:String = "NoName"
     var alertController:UIAlertController!
 
     @IBOutlet weak var gradeLabel: UILabel!
@@ -38,12 +52,12 @@ class ShowGradeViewController: UIViewController {
         let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
             // this code runs when the user hits the "save" button
             self.inputName = self.alertController.textFields![0].text!
+            self.uploadRank()
             self.performSegue(withIdentifier: "showLeaderBoard", sender: nil)
         }
 
         alertController.addAction(cancelAction)
         alertController.addAction(saveAction)
-
     }
     
     @IBAction func dismissShowGrade(_ sender: Any) {
@@ -70,5 +84,29 @@ class ShowGradeViewController: UIViewController {
               }
        }
        return result
+    }
+    
+    func uploadRank() {
+        let databaseUrl = getStringValueFromPlist(forKey: "databaseUrl")
+        let apiKey = getStringValueFromPlist(forKey: "airtableApiKey")
+        
+        let url = URL(string: databaseUrl)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let encoder = JSONEncoder()
+        let httpBody = RankBody(records: [
+            .init(fields: .init(
+                name: inputName,
+                matchCount: String(grade)
+            ))
+        ])
+        request.httpBody = try? encoder.encode(httpBody)
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let data,
+               let content = String(data: data, encoding: .utf8) {
+            }
+        }.resume()
     }
 }

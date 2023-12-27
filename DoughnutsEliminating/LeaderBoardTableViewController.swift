@@ -7,37 +7,46 @@
 
 import UIKit
 
-struct Rank {
-    var name: String
-    var matchCount: Int
+// Decode
+//struct LeaderBoardRecords:Decodable {
+//    var records:[Records]
+//}
+//
+//struct Records:Decodable {
+//    var id:String
+//    var createdTime:String
+//    var fields:Player
+//}
+//
+//struct Player:Decodable {
+//    var name:String
+//    var matchCount:String
+//}
+
+struct LeaderBoardRecords:Decodable {
+    let records:[Record]
+    
+    struct Record:Decodable {
+        let id:String
+        let createdTime:String
+        let fields:Fields
+    }
+
+    struct Fields:Decodable {
+        var name:String
+        var matchCount:String
+    }
 }
 
 class LeaderBoardTableViewController: UITableViewController {
     var inputName:String!
     var grade:Int!
-
-    @IBOutlet var labels: [UILabel]!
-    var rankPlaceholder = [
-        Rank(name: "Bin Weng", matchCount: 9),
-        Rank(name: "Stephen Chidwick", matchCount: 11),
-        Rank(name: "Christopher Brewer", matchCount: 13),
-        Rank(name: "Tony Ren Lin", matchCount: 15),
-        Rank(name: "Jesse Lonis", matchCount: 16),
-        Rank(name: "Jason Koon", matchCount: 17),
-        Rank(name: "Daniel Chi Tang", matchCount: 19),
-        Rank(name: "Adam Hendrix", matchCount: 22),
-        Rank(name: "Justin Saliba", matchCount: 25)
-    ]
+    var players:[LeaderBoardRecords.Fields] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        rankPlaceholder.append(Rank(name: inputName, matchCount: grade))
-        let sortedRank = rankPlaceholder.sorted(by: { $0.matchCount < $1.matchCount })
         
-        for (i, label) in labels.enumerated() {
-            label.text = "\(sortedRank[i].name)   \(sortedRank[i].matchCount) times"
-        }
-        
+        self.fetchLeaderBoardData()
     }
     // MARK: - Table view data source
 
@@ -45,21 +54,47 @@ class LeaderBoardTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
 
-    /*
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return players.count
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "leaderBoardCell", for: indexPath)
+        let player = players[indexPath.row]
+        cell.textLabel?.text = player.name
+        cell.detailTextLabel?.text = "\(String(player.matchCount)) times"
         return cell
     }
-    */
+    
+    func fetchLeaderBoardData() {
+        let databaseUrl = getStringValueFromPlist(forKey: "databaseUrl")
+        let apiKey = getStringValueFromPlist(forKey: "airtableApiKey")
+        
+        let url = URL(string: databaseUrl)!
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let data {
+                let decoder = JSONDecoder()
+                do {
+                    let lbs = try decoder.decode(LeaderBoardRecords.self, from: data)
+                    for rec in lbs.records {
+                        self.players.append(rec.fields)
+                    }
+                    self.players = self.players.sorted(by: { Int($0.matchCount)! < Int($1.matchCount)! })
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                } catch {
+                    print(error)
+                }
+            } else if let error {
+                print(error)
+            }
+        }.resume()
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -97,7 +132,6 @@ class LeaderBoardTableViewController: UITableViewController {
     */
 
     /*
-    // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

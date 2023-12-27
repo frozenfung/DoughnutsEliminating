@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		B023016E2B32FC7B00FB1A31 /* ShowGradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B023016D2B32FC7B00FB1A31 /* ShowGradeViewController.swift */; };
 		B02301722B371A0800FB1A31 /* LeaderBoardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02301712B371A0800FB1A31 /* LeaderBoardTableViewController.swift */; };
+		B028D5292B3BE03000281F57 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B028D5282B3BE03000281F57 /* Keys.plist */; };
+		B028D52B2B3BE6BA00281F57 /* lib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D52A2B3BE6BA00281F57 /* lib.swift */; };
+		B028D52D2B3BE75000281F57 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B028D52C2B3BE75000281F57 /* .gitignore */; };
 		B09ADB5F2B2F42580048FB86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09ADB5E2B2F42580048FB86 /* AppDelegate.swift */; };
 		B09ADB612B2F42580048FB86 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09ADB602B2F42580048FB86 /* SceneDelegate.swift */; };
 		B09ADB632B2F42580048FB86 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09ADB622B2F42580048FB86 /* ViewController.swift */; };
@@ -23,6 +26,9 @@
 /* Begin PBXFileReference section */
 		B023016D2B32FC7B00FB1A31 /* ShowGradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowGradeViewController.swift; sourceTree = "<group>"; };
 		B02301712B371A0800FB1A31 /* LeaderBoardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardTableViewController.swift; sourceTree = "<group>"; };
+		B028D5282B3BE03000281F57 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		B028D52A2B3BE6BA00281F57 /* lib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lib.swift; sourceTree = "<group>"; };
+		B028D52C2B3BE75000281F57 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B09ADB5B2B2F42580048FB86 /* DoughnutsEliminating.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoughnutsEliminating.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B09ADB5E2B2F42580048FB86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B09ADB602B2F42580048FB86 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,10 +82,13 @@
 				B09ADB642B2F42580048FB86 /* Main.storyboard */,
 				B02301712B371A0800FB1A31 /* LeaderBoardTableViewController.swift */,
 				B09ADB672B2F42590048FB86 /* Assets.xcassets */,
+				B028D5282B3BE03000281F57 /* Keys.plist */,
+				B028D52A2B3BE6BA00281F57 /* lib.swift */,
 				B0C56D6A2B2F622E00138877 /* DoughnutClass.swift */,
 				B0C56D6C2B2F6AEC00138877 /* GameClass.swift */,
 				B09ADB692B2F42590048FB86 /* LaunchScreen.storyboard */,
 				B09ADB6C2B2F42590048FB86 /* Info.plist */,
+				B028D52C2B3BE75000281F57 /* .gitignore */,
 			);
 			path = DoughnutsEliminating;
 			sourceTree = "<group>";
@@ -152,6 +161,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B028D52D2B3BE75000281F57 /* .gitignore in Resources */,
+				B028D5292B3BE03000281F57 /* Keys.plist in Resources */,
 				B09ADB6B2B2F42590048FB86 /* LaunchScreen.storyboard in Resources */,
 				B09ADB682B2F42590048FB86 /* Assets.xcassets in Resources */,
 				B09ADB662B2F42580048FB86 /* Main.storyboard in Resources */,
@@ -168,6 +179,7 @@
 				B09ADB632B2F42580048FB86 /* ViewController.swift in Sources */,
 				B023016E2B32FC7B00FB1A31 /* ShowGradeViewController.swift in Sources */,
 				B09ADB5F2B2F42580048FB86 /* AppDelegate.swift in Sources */,
+				B028D52B2B3BE6BA00281F57 /* lib.swift in Sources */,
 				B0C56D6D2B2F6AEC00138877 /* GameClass.swift in Sources */,
 				B02301722B371A0800FB1A31 /* LeaderBoardTableViewController.swift in Sources */,
 				B0C56D6B2B2F622E00138877 /* DoughnutClass.swift in Sources */,
